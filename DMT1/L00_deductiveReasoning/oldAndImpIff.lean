@@ -156,3 +156,6 @@ def piffq : P ↔ Q := Iff.intro ifpq ifqp
 
 #check piffq.mp   -- expect P → Q
 #check piffq.mpr  -- expect Q → P
+
+
+def foo : Prop := (1+1=2) -> (2+2=4)

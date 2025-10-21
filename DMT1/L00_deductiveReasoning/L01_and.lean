@@ -203,7 +203,7 @@ applications to navigate to nested sub-proofs.~
 We now have the inference rules, as axioms, that define
 exactly how proofs of conjunctions (P ∧ Q propositions)
 behave: how you can produce them, and how you can use ones
-you have in constructing other proofs).
+you have in constructing other proofs.
 
 As a great example, in our logic *we want to know* that
 no matter what propositions one start with, our friends
@@ -294,8 +294,11 @@ theorem proofAndCommutes : andCommutes :=
         )
       )
       -- right conjunct: Q ∧ P → P ∧ Q
-      (
-        sorry     -- ok, Lean, trust me (acceot as axiom)
+      (fun h: Q ∧ P =>
+        (
+          And.intro h.right h.left
+        )
+          -- ok, Lean, trust me (acceot as axiom)
       )
 
 
@@ -440,9 +443,8 @@ theorem proofAndAssoc : P ∧ (Q ∧ R) ↔ (P ∧ Q) ∧ R :=
   (
     fun
     (h : (P ∧ Q) ∧ R) =>
-    (
-      sorry
-    )
+    by
+      exact And.intro h.left.left (And.intro h.left.right h.right)
   )
 
 end DMT1.L00_reasoning
